@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from pyparsing import Suppress, Optional, CharsNotIn, Word, \
-        QuotedString, ZeroOrMore, stringEnd
+        QuotedString, OneOrMore, ZeroOrMore, stringEnd, \
+        Combine, White
 from eodermdrome.program import Command, Program
 
 def parse(path):
@@ -10,7 +11,9 @@ def parse(path):
 
     # Graph characters and construction
     graphchars = "abcdefghijklmnopqrstuvwxyz"
-    graph = Word(graphchars)
+    punctchars = ".!?¡¿;:[]{}-_‹›«»'\""
+    punctuated_whitespace = ZeroOrMore(Optional(White()) + Word(punctchars) + Optional(White()))
+    graph = Combine(OneOrMore(Word(graphchars) + Optional(Suppress(punctuated_whitespace))))
 
     # Input and output text
     text = QuotedString("(", endQuoteChar = ")", multiline = True)
