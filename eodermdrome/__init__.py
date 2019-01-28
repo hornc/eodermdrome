@@ -10,7 +10,7 @@ def usage(prog):
 def run(fname, debug):
     p = parse(fname)
     p.render = debug
-    p.run("".join(stdin))
+    p.run("".join(stdin.readline()) if any([cmd.input for cmd in p.commands]) else None)
 
 def main():
     if len(argv) < 2:
