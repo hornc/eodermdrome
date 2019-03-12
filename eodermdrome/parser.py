@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from pyparsing import Suppress, Optional, CharsNotIn, Word, \
         QuotedString, OneOrMore, ZeroOrMore, stringEnd, \
